@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PC Papelaria · Gestão</title>
+  <meta name="description" content="Protótipo de sistema de gestão para a PC Papelaria Contacto: vendas (PDV), estoque, ordens de serviço, clientes e financeiro." />
+  <meta name="theme-color" content="#2E3097" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    // aplica o tema antes de pintar a tela (evita "piscar")
+    try { const t = localStorage.getItem('pcpapelaria:theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <!-- ===== Tela de login ===== -->
+  <section id="login" class="login" hidden>
+    <div class="login-art" aria-hidden="true">
+      <div class="curl-shape curl-a"></div>
+      <div class="curl-shape curl-b"></div>
+      <div class="login-pitch">
+        <p class="eyebrow light">Sistema de gestão</p>
+        <h2>Sua papelaria organizada na palma da mão.</h2>
+        <ul>
+          <li>Vendas rápidas no caixa, inclusive pelo celular</li>
+          <li>Estoque com alerta automático de reposição</li>
+          <li>Impressões, encadernações e listas escolares</li>
+        </ul>
+      </div>
+    </div>
+    <div class="login-panel">
+      <form class="login-card" id="loginForm" autocomplete="off">
+        <div class="login-logo"><img src="assets/logo.png" alt="PC Papelaria Contacto — desde 2003" /></div>
+        <h1>Bem-vindo de volta</h1>
+        <p class="muted">Acesse o painel da loja</p>
+        <label class="field">
+          <span>E-mail</span>
+          <input type="email" value="caixa@pcpapelaria.com.br" required />
+        </label>
+        <label class="field">
+          <span>Senha</span>
+          <input type="password" value="demonstracao" required />
+        </label>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Entrar</button>
+        <p class="demo-note">Ambiente de demonstração · dados fictícios</p>
+      </form>
+      <p class="credit" id="loginCredit"></p>
+    </div>
+  </section>
+
+  <!-- ===== Aplicação ===== -->
+  <div id="app" class="app" hidden>
+    <aside class="sidebar" aria-label="Menu principal">
+      <a class="brand" href="#/inicio" aria-label="Início">
+        <span class="brand-paper"><img src="assets/mark.png" alt="" /></span>
+        <span class="brand-text"><strong>PC Papelaria</strong><small>Contacto · desde 2003</small></span>
+      </a>
+      <nav class="side-nav" id="sideNav"></nav>
+      <div class="side-foot">
+        <button class="side-link" data-action="logout"><span class="side-ico" data-icon="logout"></span><span class="side-label">Sair</span></button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <a class="top-brand" href="#/inicio" aria-label="Início"><img src="assets/mark.png" alt="PC Papelaria" /></a>
+        <div class="top-title" id="topTitle">Início</div>
+        <div class="top-actions">
+          <span class="demo-pill" title="Os dados ficam salvos apenas neste navegador">Demonstração</span>
+          <button class="icon-btn" data-action="toggle-theme" aria-label="Alternar tema claro/escuro" id="themeBtn"></button>
+          <div class="notif-wrap">
+            <button class="icon-btn" data-action="toggle-notif" aria-label="Notificações" id="notifBtn"></button>
+            <div class="popover" id="notifPop" hidden></div>
+          </div>
+          <div class="avatar" title="Caixa · Loja Centro">CX</div>
+        </div>
+      </header>
+
+      <main id="view" class="view" tabindex="-1"></main>
+    </div>
+
+    <nav class="bottom-nav" id="bottomNav" aria-label="Navegação"></nav>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <div id="chartTip" class="chart-tip" hidden></div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
